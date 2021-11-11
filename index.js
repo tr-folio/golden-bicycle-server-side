@@ -107,6 +107,18 @@ async function run() {
         app.get('/readproducts', (req, res) => {
             res.send(products);
         });
+
+        // GET method for limitted products API
+        app.get('/readLimittedProducts/:limit', (req, res) => {
+            const limit = req.params.limit;
+            // console.log(limit);
+            const limittedProducts = [];
+            for (let i = 0; i < limit; i++) {
+                limittedProducts.push(products[i]);
+            }
+            res.send(limittedProducts);
+        });
+
         // GET method for reviews API
         app.get('/readreviews', (req, res) => {
             res.send(reviews);

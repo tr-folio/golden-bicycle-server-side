@@ -45,6 +45,30 @@ const products = [
         productName: 'Mountain Bike',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
         img: 'https://i.ibb.co/dKycf1w/robert-bye-t-G36rv-Ceqng-unsplash.jpg'
+    },
+    {
+        id: 7,
+        productName: 'Stunt Bike',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+        img: 'https://i.ibb.co/dKycf1w/robert-bye-t-G36rv-Ceqng-unsplash.jpg'
+    },
+    {
+        id: 8,
+        productName: 'Baby Bike',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+        img: 'https://i.ibb.co/dKycf1w/robert-bye-t-G36rv-Ceqng-unsplash.jpg'
+    },
+    {
+        id: 9,
+        productName: 'Offroad Bike',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+        img: 'https://i.ibb.co/dKycf1w/robert-bye-t-G36rv-Ceqng-unsplash.jpg'
+    },
+    {
+        id: 10,
+        productName: 'Fixed-Gear Bike',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+        img: 'https://i.ibb.co/dKycf1w/robert-bye-t-G36rv-Ceqng-unsplash.jpg'
     }
 ]
 

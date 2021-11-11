@@ -12,40 +12,61 @@ app.use(express.json());
 const products = [
     {
         id: 1,
-        name: 'City Bike',
+        productName: 'City Bike',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
         img: 'https://i.ibb.co/dKycf1w/robert-bye-t-G36rv-Ceqng-unsplash.jpg'
     },
     {
         id: 2,
-        name: 'Road Bike',
+        productName: 'Road Bike',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
         img: 'https://i.ibb.co/dKycf1w/robert-bye-t-G36rv-Ceqng-unsplash.jpg'
     },
     {
         id: 3,
-        name: 'Touring Bike',
+        productName: 'Touring Bike',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
         img: 'https://i.ibb.co/dKycf1w/robert-bye-t-G36rv-Ceqng-unsplash.jpg'
     },
     {
         id: 4,
-        name: 'Fitness Bike',
+        productName: 'Fitness Bike',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
         img: 'https://i.ibb.co/dKycf1w/robert-bye-t-G36rv-Ceqng-unsplash.jpg'
     },
     {
         id: 5,
-        name: 'Hybrid Bike',
+        productName: 'Hybrid Bike',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
         img: 'https://i.ibb.co/dKycf1w/robert-bye-t-G36rv-Ceqng-unsplash.jpg'
     },
     {
         id: 6,
-        name: 'Mountain Bike',
+        productName: 'Mountain Bike',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
         img: 'https://i.ibb.co/dKycf1w/robert-bye-t-G36rv-Ceqng-unsplash.jpg'
     }
+]
+
+const reviews = [
+    {
+        review_id: 1,
+        review_by: 'user one',
+        review_text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+        rating: 4
+    },
+    {
+        review_id: 2,
+        review_by: 'user one',
+        review_text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+        rating: 5
+    },
+    {
+        review_id: 3,
+        review_by: 'user one',
+        review_text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+        rating: 4
+    },
 ]
 
 // mongodb local database server connection
@@ -61,6 +82,10 @@ async function run() {
         // GET method for products API
         app.get('/readproducts', (req, res) => {
             res.send(products);
+        });
+        // GET method for reviews API
+        app.get('/readreviews', (req, res) => {
+            res.send(reviews);
         });
     }
     finally {
@@ -87,9 +112,9 @@ run().catch(console.dir);
 // run().catch(console.dir);
 
 app.get('/', (req, res) => {
-    res.send('Running doctors portal server');
+    res.send('running golden bicycle server');
 });
 
 app.listen(port, () => {
-    console.log(`Doctors portal app listening at http://localhost:${port}`);
+    console.log(`golden bicycle app listening at http://localhost:${port}`);
 });

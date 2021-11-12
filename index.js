@@ -60,6 +60,26 @@ async function run() {
             const result = await reviewsCollection.find().toArray();
             res.send(result);
         });
+
+        // GET method to retrieve single product
+        app.get('/readSingleProduct/:id', async (req, res) => {
+            await client.connect();
+            console.log('database connected successfully');
+            const database = client.db('golden_bicycle');
+            const productsCollection = database.collection('products');
+            const id = req.params.id;
+            console.log(id);
+            const result = await productsCollection.find().toArray();
+            // console.log(result);
+            let selectedProduct = [];
+            for (let i = 0; i < result.length; i++) {
+                if (result[i].id == id) {
+                    console.log(result[i]);
+                    selectedProduct.push(result[i]);
+                }
+            }
+            res.send(selectedProduct);
+        })
     }
     finally {
         await client.close();

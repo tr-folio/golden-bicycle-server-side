@@ -9,7 +9,7 @@ const port = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-// // mongodb local database server connection
+// mongodb local database server connection
 const uri = 'mongodb://127.0.0.1:27017'; // 127.0.0.1 = localhost
 // const uri = 'mongodb://localhost:27017'; // 127.0.0.1 = localhost
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });

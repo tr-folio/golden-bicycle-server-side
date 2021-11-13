@@ -100,8 +100,9 @@ async function run() {
             const database = client.db('golden_bicycle');
             const ordersCollection = database.collection('orders');
             const order = req.body;
-            console.log(order);
-            res.json({message: 'post method for placing order working'});
+            // console.log(order);
+            const result = await ordersCollection.insertOne(order);
+            res.json(result);
         })
     }
     finally {

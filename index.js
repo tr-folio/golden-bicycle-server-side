@@ -79,7 +79,19 @@ async function run() {
                 }
             }
             res.send(selectedProduct);
-        })
+        });
+
+        // POST method to create users
+        app.post('/postusers', async (req, res) => {
+            await client.connect();
+            console.log('database connected successfully');
+            const database = client.db('golden_bicycle');
+            const usersCollection = database.collection('users');
+            const user = req.body;
+            const result = await usersCollection.insertOne(user);
+            console.log(result);
+            res.json(result);
+        });
     }
     finally {
         await client.close();

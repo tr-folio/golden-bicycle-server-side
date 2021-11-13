@@ -68,13 +68,13 @@ async function run() {
             const database = client.db('golden_bicycle');
             const productsCollection = database.collection('products');
             const id = req.params.id;
-            console.log(id);
+            // console.log(id);
             const result = await productsCollection.find().toArray();
             // console.log(result);
             let selectedProduct = [];
             for (let i = 0; i < result.length; i++) {
                 if (result[i].id == id) {
-                    console.log(result[i]);
+                    // console.log(result[i]);
                     selectedProduct.push(result[i]);
                 }
             }
@@ -89,9 +89,20 @@ async function run() {
             const usersCollection = database.collection('users');
             const user = req.body;
             const result = await usersCollection.insertOne(user);
-            console.log(result);
+            // console.log(result);
             res.json(result);
         });
+
+        // POST method to place orders
+        app.post('/placeOrders', async (req, res) => {
+            await client.connect();
+            console.log('database connected successfully');
+            const database = client.db('golden_bicycle');
+            const ordersCollection = database.collection('orders');
+            const order = req.body;
+            console.log(order);
+            res.json({message: 'post method for placing order working'});
+        })
     }
     finally {
         await client.close();

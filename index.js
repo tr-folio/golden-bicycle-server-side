@@ -91,6 +91,23 @@ async function run() {
             res.send(selectedProduct);
         });
 
+        // GET method to retrieve orders of a specific user
+        app.get('/readSpecificOrders/:email', async (req, res) => {
+            await client.connect();
+            console.log('database connected successfully');
+            const database = client.db('golden_bicycle');
+            const ordersCollection = database.collection('orders');
+            email = req.params.email;
+            const result = await ordersCollection.find().toArray();
+            let ordersByThisUser = [];
+            for (let i = 0; i < result.length; i++) {
+                if (result[i].userEmail === email) {
+                    ordersByThisUser.push(result[i]);
+                }
+            }
+            res.send(ordersByThisUser);
+        })
+
         // GET method to retrieve users
         app.get('/checkAdmin/:email', async (req, res) => {
             await client.connect();

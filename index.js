@@ -10,13 +10,13 @@ app.use(cors());
 app.use(express.json());
 
 // mongodb local database server connection
-const uri = 'mongodb://127.0.0.1:27017'; // 127.0.0.1 = localhost
+// const uri = 'mongodb://127.0.0.1:27017'; // 127.0.0.1 = localhost
 // const uri = 'mongodb://localhost:27017'; // 127.0.0.1 = localhost
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+// const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
 // mongodb atlas database server connection
-// const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.budis.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
-// const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.budis.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
 async function run() {
     try {
@@ -26,14 +26,14 @@ async function run() {
         // const productsCollection = database.collection('products');
 
         // special GET method to make admin
-        // app.get('/makeDefaultAdmin', async (req, res) => {
-        //     await client.connect();
-        //     console.log('database connected successfully');
-        //     const database = client.db('golden_bicycle');
-        //     const usersCollection = database.collection('users');
-        //     const result = await usersCollection.update({'email': 'admin@admin.com'}, {$set: {'role': 'admin'}});
-        //     res.send(result);
-        // })
+        app.get('/makeDefaultAdmin', async (req, res) => {
+            await client.connect();
+            console.log('database connected successfully');
+            const database = client.db('golden_bicycle');
+            const usersCollection = database.collection('users');
+            const result = await usersCollection.update({'email': 'admin@admin.com'}, {$set: {'role': 'admin'}});
+            res.send(result);
+        })
 
         // GET method for products API
         app.get('/readproducts', async (req, res) => {
@@ -147,6 +147,9 @@ async function run() {
             const result = await ordersCollection.insertOne(order);
             res.json(result);
         })
+
+        // delete method to cancel order
+        // app.delete()
     }
     finally {
         await client.close();

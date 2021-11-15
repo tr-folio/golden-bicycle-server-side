@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const {MongoClient} = require('mongodb');
+const ObjectId = require('mongodb').ObjectID;
 const cors = require('cors');
 require('dotenv').config();
 const port = process.env.PORT || 5000;
@@ -149,7 +150,17 @@ async function run() {
         })
 
         // delete method to cancel order
-        // app.delete()
+        app.delete('/cancelOrder/:id', async (req, res) => {
+            await client.connect();
+            console.log('database connected successfully');
+            const database = client.db('golden_bicycle');
+            const ordersCollection = database.collection('orders');
+            const id = req.params.id;
+            // console.log(id);
+            const query = {_id:ObjectId(id)};
+            const result = await ordersCollection.deleteOne(query);
+            res.json(result);
+        })
     }
     finally {
         await client.close();

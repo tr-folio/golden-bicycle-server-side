@@ -125,6 +125,21 @@ async function run() {
             res.json({admin: isAdmin});
         })
 
+        // GET method to read product names
+        app.get('/readProductNames', async (req, res) => {
+            await client.connect();
+            console.log('database connected successfully');
+            const database = client.db('golden_bicycle');
+            const productsCollection = database.collection('products');
+            const result = await productsCollection.find().toArray();
+            let productNames = [];
+            for (let i = 0; i < result.length; i++) {
+                productNames.push(result[i].productName);
+            }
+            res.send(productNames);
+            // res.send('ok');
+        })
+
         // POST method to create users
         app.post('/postusers', async (req, res) => {
             await client.connect();

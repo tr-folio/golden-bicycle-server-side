@@ -26,15 +26,17 @@ async function run() {
         // const database = client.db('golden_bicycle');
         // const productsCollection = database.collection('products');
 
-        // special GET method to make admin
-        // app.get('/makeDefaultAdmin', async (req, res) => {
-        //     await client.connect();
-        //     console.log('database connected successfully');
-        //     const database = client.db('golden_bicycle');
-        //     const usersCollection = database.collection('users');
-        //     const result = await usersCollection.update({'email': 'admin@admin.com'}, {$set: {'role': 'admin'}});
-        //     res.send(result);
-        // })
+        // PUT method to make admin
+        app.put('/makeAnAdmin', async (req, res) => {
+            await client.connect();
+            console.log('database connected successfully');
+            const database = client.db('golden_bicycle');
+            const usersCollection = database.collection('users');
+            const user = req.body;
+            // console.log(user);
+            const result = await usersCollection.updateOne(user, {$set: {'role': 'admin'}});
+            res.send(result);
+        })
 
         // GET method for products API
         app.get('/readproducts', async (req, res) => {

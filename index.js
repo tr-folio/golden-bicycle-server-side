@@ -38,6 +38,23 @@ async function run() {
             res.send(result);
         })
 
+        // GET method to read userEmails
+        app.get('/checkValidUser/:email', async (req, res) => {
+            await client.connect();
+            console.log('database connected successfully');
+            const database = client.db('golden_bicycle');
+            const usersCollection = database.collection('users');
+            const email = req.params.email;
+            const query = {email: email};
+            const result = await usersCollection.findOne(query);
+            if (result) {
+                res.send({isValidUser: true});
+            }
+            else {
+                res.send({isValidUser: false});
+            }
+        })
+
         // GET method for products API
         app.get('/readproducts', async (req, res) => {
             await client.connect();

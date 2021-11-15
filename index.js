@@ -164,6 +164,18 @@ async function run() {
             res.json(result);
         })
 
+        // POST method to add a review
+        app.post('/addReview', async (req, res) => {
+            await client.connect();
+            console.log('database connected successfully');
+            const database = client.db('golden_bicycle');
+            const reviewsCollection = database.collection('reviews');
+            const review = req.body;
+            // console.log(review);
+            const result = await reviewsCollection.insertOne(review);
+            res.json(result);
+        })
+
         // delete method to cancel order
         app.delete('/cancelOrder/:id', async (req, res) => {
             await client.connect();

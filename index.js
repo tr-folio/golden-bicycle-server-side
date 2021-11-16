@@ -105,15 +105,6 @@ async function run() {
             const retrievedProduct = [];
             retrievedProduct.push(result);
             res.send(retrievedProduct);
-            // // console.log(result);
-            // let selectedProduct = [];
-            // for (let i = 0; i < result.length; i++) {
-            //     if (result[i].id == id) {
-            //         // console.log(result[i]);
-            //         selectedProduct.push(result[i]);
-            //     }
-            // }
-            // res.send(selectedProduct);
         });
 
         // GET method to retrieve orders of a specific user

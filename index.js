@@ -119,6 +119,16 @@ async function run() {
             res.send(ordersByThisUser);
         })
 
+        // GET method to retrieve all orders
+        app.get('/readOrders', async (req, res) => {
+            await client.connect();
+            console.log('database connected successfully');
+            const database = client.db('golden_bicycle');
+            const ordersCollection = database.collection('orders');
+            const result = await ordersCollection.find().toArray();
+            res.send(result);
+        })
+
         // GET method to retrieve users
         app.get('/checkAdmin/:email', async (req, res) => {
             await client.connect();

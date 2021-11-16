@@ -134,7 +134,7 @@ async function run() {
             const query = {email: email};
             const result = await usersCollection.findOne(query);
             let isAdmin = false;
-            if (result.role === 'admin') {
+            if (result.role == 'admin') {
                 isAdmin = true;
             }
             res.json({admin: isAdmin});
@@ -211,8 +211,10 @@ async function run() {
             const database = client.db('golden_bicycle');
             const productsCollection = database.collection('products');
             const id = req.params.id;
-            console.log('from delete a product id:', id);
-            res.json({message: "delete api hitting"});
+            const query = {_id:ObjectId(id)};
+            const result = await productsCollection.deleteOne(query);
+            // console.log('from delete a product id:', id);
+            res.json(result);
         })
     }
     finally {

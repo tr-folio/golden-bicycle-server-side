@@ -205,12 +205,12 @@ async function run() {
         })
 
         // delete method to delete a product
-        app.delete('/deleteAProduct', async (req, res) => {
+        app.delete('/deleteAProduct/:id', async (req, res) => {
             await client.connect();
             console.log('database connected successfully');
             const database = client.db('golden_bicycle');
             const productsCollection = database.collection('products');
-            const id = req.body;
+            const id = req.params.id;
             console.log('from delete a product id:', id);
             res.json({message: "delete api hitting"});
         })

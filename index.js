@@ -10,11 +10,6 @@ const port = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-// mongodb local database server connection
-// const uri = 'mongodb://127.0.0.1:27017'; // 127.0.0.1 = localhost
-// const uri = 'mongodb://localhost:27017'; // 127.0.0.1 = localhost
-// const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-
 // mongodb atlas database server connection
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.budis.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -188,6 +183,18 @@ async function run() {
             const review = req.body;
             // console.log(review);
             const result = await reviewsCollection.insertOne(review);
+            res.json(result);
+        })
+
+        // POST method to add a product
+        app.post('/addAProduct', async (req, res) => {
+            await client.connect();
+            console.log('database connected successfully');
+            const database = client.db('golden_bicycle');
+            const productsCollection = database.collection('products');
+            const newProduct = req.body;
+            // console.log(newProduct);
+            const result = await productsCollection.insertOne(newProduct);
             res.json(result);
         })
 

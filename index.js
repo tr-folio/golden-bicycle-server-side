@@ -99,16 +99,21 @@ async function run() {
             const productsCollection = database.collection('products');
             const id = req.params.id;
             // console.log(id);
-            const result = await productsCollection.find().toArray();
+            const query = {_id: ObjectId(id)};
+            const result = await productsCollection.findOne(query);
             // console.log(result);
-            let selectedProduct = [];
-            for (let i = 0; i < result.length; i++) {
-                if (result[i].id == id) {
-                    // console.log(result[i]);
-                    selectedProduct.push(result[i]);
-                }
-            }
-            res.send(selectedProduct);
+            const retrievedProduct = [];
+            retrievedProduct.push(result);
+            res.send(retrievedProduct);
+            // // console.log(result);
+            // let selectedProduct = [];
+            // for (let i = 0; i < result.length; i++) {
+            //     if (result[i].id == id) {
+            //         // console.log(result[i]);
+            //         selectedProduct.push(result[i]);
+            //     }
+            // }
+            // res.send(selectedProduct);
         });
 
         // GET method to retrieve orders of a specific user
@@ -206,6 +211,17 @@ async function run() {
             const query = {_id:ObjectId(id)};
             const result = await ordersCollection.deleteOne(query);
             res.json(result);
+        })
+
+        // delete method to delete a product
+        app.delete('/deleteAProduct', async (req, res) => {
+            await client.connect();
+            console.log('database connected successfully');
+            const database = client.db('golden_bicycle');
+            const productsCollection = database.collection('products');
+            const id = req.body;
+            console.log('from delete a product id:', id);
+            res.json({message: "delete api hitting"});
         })
     }
     finally {

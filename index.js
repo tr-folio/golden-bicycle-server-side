@@ -33,6 +33,19 @@ async function run() {
             res.send(result);
         })
 
+        // PUT method to change order status
+        app.put('/changeStatus', async (req, res) => {
+            await client.connect();
+            console.log('database connected successfully');
+            const database = client.db('golden_bicycle');
+            const ordersCollection = database.collection('orders');
+            const id = req.body;
+            // console.log(id);
+            const query = {_id:ObjectId(id)};
+            const result = await ordersCollection.updateOne(query, {$set: {'status': 'shipped'}});
+            res.send(result);
+        })
+
         // GET method to read userEmails
         app.get('/checkValidUser/:email', async (req, res) => {
             await client.connect();

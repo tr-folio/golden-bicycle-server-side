@@ -46,6 +46,18 @@ async function run() {
             res.send(result);
         })
 
+        // PUT method to save google user
+        app.put('/putGoogleUser', async (req, res) => {
+            await client.connect();
+            console.log('database connected successfully');
+            const database = client.db('golden_bicycle');
+            const usersCollection = database.collection('users');
+            const googleUser = req.body;
+            const result = await usersCollection.insertOne(googleUser);
+            console.log(result);
+            res.send(result);
+        })
+
         // GET method to read userEmails
         app.get('/checkValidUser/:email', async (req, res) => {
             await client.connect();

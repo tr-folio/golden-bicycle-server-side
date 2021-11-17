@@ -258,6 +258,19 @@ async function run() {
             // console.log('from delete a product id:', id);
             res.json(result);
         })
+
+        // delete method to delete an order by admin
+        app.delete('/deleteAnOrder/:id', async (req, res) => {
+            await client.connect();
+            console.log('database connected successfully');
+            const database = client.db('golden_bicycle');
+            const ordersCollection = database.collection('orders');
+            const id = req.params.id;
+            const query = {_id:ObjectId(id)};
+            console.log(query);
+            const result = await ordersCollection.deleteOne(query);
+            res.json(result);
+        })
     }
     finally {
         await client.close();
